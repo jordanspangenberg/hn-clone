@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { ThemeProvider } from "./context/theme";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Nav from "./components/Nav";
+import Feed from "./components/Feed";
+import Loading from './components/Loading'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    theme: "dark",
+    toggleTheme: () => {
+      this.setState(({ theme }) => ({
+        theme: theme === "light" ? "dark" : "light"
+      }));
+    }
+  };
+  render() {
+    return (
+      <Router>
+      <ThemeProvider value={this.state}>
+        <div className={this.state.theme}>
+          <div className='container' >
+              <Nav />
+              <React.Suspense fallback={Loading}>
+              <Switch>
+                <Route exact path='/' component={Feed} />
+                <Route exact path='/new' component={Feed}  />
+                <Route exact path='/best' component={Feed}  />
+
+              </Switch>
+              </React.Suspense>
+
+          </div>
+        </div>
+      </ThemeProvider>
+      </Router>
+    );
+  }
 }
 
 export default App;
