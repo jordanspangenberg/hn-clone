@@ -3,7 +3,7 @@ import { ThemeConsumer } from "../context/theme";
 import { NavLink } from 'react-router-dom'
 
 const activeStyle = {
-  color: "rgb(187, 146, 31)"
+  color: "rgb(187, 46, 31)"
 };
 
 export default function Nav() {

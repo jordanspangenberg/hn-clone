@@ -28,6 +28,10 @@ li {
   min-height: 100%;
 }
 
+.dark a {
+  color: rgb(203, 203, 203);
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
@@ -85,7 +89,6 @@ li {
 }
 
 .bg-light {
-    background: rgba(0, 0, 0, 0.08);
     border-radius: 3px;
 }
 
@@ -152,7 +155,6 @@ li {
 }
 
 .bg-dark {
-  background: rgb(36, 40, 42);
   border-radius: 3px;
 }
 

@@ -25,8 +25,8 @@ class App extends React.Component {
               <React.Suspense fallback={Loading}>
               <Switch>
                 <Route exact path='/' component={Feed} />
-                <Route exact path='/new' component={Feed}  />
-                <Route exact path='/best' component={Feed}  />
+                <Route exact path='/:new' component={Feed} />}  />
+                <Route exact path='/:best' component={Feed}  />
 
               </Switch>
               </React.Suspense>

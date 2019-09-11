@@ -15,7 +15,6 @@ export default function Post(object) {
   } = object.story;
 
   const dateTime = new Date(time*1000).toLocaleString().replace(/:\d{2}\s/,' ')
-  console.log(dateTime)
   return (
     <ThemeConsumer>
       {({ theme }) => (

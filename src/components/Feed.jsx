@@ -38,8 +38,15 @@ export default class Feed extends Component {
   };
 
   componentDidMount() {
+    const { feed } = this.props.match.params;
+
+    this.setState({
+      selectedFeed: feed
+    });
+
     this.updateFeed(this.state.selectedFeed);
   }
+
 
   updateFeed = selectedFeed => {
     this.setState({
@@ -63,6 +70,7 @@ export default class Feed extends Component {
   };
   render() {
     const { selectedFeed, stories, error } = this.state;
+    console.log(selectedFeed);
     return (
       <ThemeConsumer>
         {({ theme }) => (
