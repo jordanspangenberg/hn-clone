@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 const styles = {
   content: {
     fontSize: "35px",

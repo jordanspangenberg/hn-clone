@@ -32,52 +32,50 @@ function StoryGrid({ stories }) {
 
 export default class Feed extends Component {
   state = {
-    selectedFeed: "top",
-    stories: {},
-    error: null
+    posts: null,
+    error: null,
+    loading: true
   };
 
   componentDidMount() {
-    const { feed } = this.props.match.params;
-
-    this.setState({
-      selectedFeed: feed
-    });
-
-    this.updateFeed(this.state.selectedFeed);
+    this.updateFeed();
   }
 
-
-  updateFeed = selectedFeed => {
-    this.setState({
-      selectedFeed,
-      error: null
-    });
-    if (!this.state.stories[selectedFeed]) {
-      fetchMainPosts(selectedFeed).then(data => {
-        this.setState(({ stories }) => ({
-          stories: {
-            ...stories,
-            [selectedFeed]: data
-          }
-        }));
-      });
+  componentDidUpdate(prev) {
+    if (prev.selectedFeed !== this.props.selectedFeed) {
+      this.updateFeed();
     }
-  };
-  isLoading = () => {
-    const { selectedFeed, stories, error } = this.state;
-    return !stories[selectedFeed] && error === null;
-  };
+  }
+
+  updateFeed () {
+    this.setState({
+      posts: null,
+      error: null,
+      loading: true
+    })
+
+    fetchMainPosts(this.props.selectedFeed)
+      .then((posts) => this.setState({
+        posts,
+        loading: false,
+        error: null
+      }))
+      .catch(({ message }) => this.setState({
+        error: message,
+        loading: false
+      }))
+  }
+
   render() {
-    const { selectedFeed, stories, error } = this.state;
-    console.log(selectedFeed);
+    const { posts, error, loading } = this.state;
     return (
       <ThemeConsumer>
         {({ theme }) => (
           <div className={`bg-${theme}`}>
-            {this.isLoading() && <Loading />}
-            {stories[selectedFeed] && (
-              <StoryGrid stories={stories[selectedFeed]} />
+            {loading && <Loading />}
+            {error && <p className='error'>{error}</p>}
+            {posts && (
+              <StoryGrid stories={posts} />
             )}
           </div>
         )}

@@ -4,7 +4,7 @@ import { ThemeProvider } from "./context/theme";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 import Feed from "./components/Feed";
-import Loading from './components/Loading'
+import Loading from "./components/Loading";
 
 class App extends React.Component {
   state = {
@@ -18,22 +18,32 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-      <ThemeProvider value={this.state}>
-        <div className={this.state.theme}>
-          <div className='container' >
+        <ThemeProvider value={this.state}>
+          <div className={this.state.theme}>
+            <div className="container">
               <Nav />
               <React.Suspense fallback={Loading}>
-              <Switch>
-                <Route exact path='/' component={Feed} />
-                <Route exact path='/:new' component={Feed} />}  />
-                <Route exact path='/:best' component={Feed}  />
-
-              </Switch>
+                <Switch>
+                  <Route
+                    exact
+                    path="/"
+                    render={() => <Feed selectedFeed="top" />}
+                  />
+                  <Route
+                    exact
+                    path="/new"
+                    render={() => <Feed selectedFeed="new" />}
+                  />
+                  <Route
+                    exact
+                    path="/best"
+                    render={() => <Feed selectedFeed="best" />}
+                  />
+                </Switch>
               </React.Suspense>
-
+            </div>
           </div>
-        </div>
-      </ThemeProvider>
+        </ThemeProvider>
       </Router>
     );
   }
