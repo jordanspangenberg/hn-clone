@@ -1,10 +1,12 @@
 import React from "react";
 import "./App.css";
-import { ThemeProvider } from "./context/theme";
+import { ThemeProvider } from "./contexts/theme";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
-import Feed from "./components/Feed";
+import Posts from "./components/Posts";
 import Loading from "./components/Loading";
+import Post from './components/Post'
+import User from './components/User'
 
 class App extends React.Component {
   state = {
@@ -27,18 +29,21 @@ class App extends React.Component {
                   <Route
                     exact
                     path="/"
-                    render={() => <Feed selectedFeed="top" />}
+                    render={() => <Posts selectedFeed="top" />}
                   />
                   <Route
                     exact
                     path="/new"
-                    render={() => <Feed selectedFeed="new" />}
+                    render={() => <Posts selectedFeed="new" />}
                   />
                   <Route
                     exact
                     path="/best"
-                    render={() => <Feed selectedFeed="best" />}
+                    render={() => <Posts selectedFeed="best" />}
                   />
+                  <Route path="/post" component={Post} />
+                  <Route path="/user" component={User} />
+                  <Route render={() => <h1>404</h1>} />
                 </Switch>
               </React.Suspense>
             </div>
