@@ -29,17 +29,17 @@ class App extends React.Component {
                   <Route
                     exact
                     path="/"
-                    render={() => <Posts selectedFeed="top" />}
+                    render={() => <Posts type="top" />}
                   />
                   <Route
                     exact
                     path="/new"
-                    render={() => <Posts selectedFeed="new" />}
+                    render={() => <Posts type="new" />}
                   />
                   <Route
                     exact
                     path="/best"
-                    render={() => <Posts selectedFeed="best" />}
+                    render={() => <Posts type="best" />}
                   />
                   <Route path="/post" component={Post} />
                   <Route path="/user" component={User} />
